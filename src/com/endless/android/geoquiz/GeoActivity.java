@@ -29,6 +29,14 @@ public class GeoActivity extends Activity {
 		mQuestionTextView.setText(question);
 	}
 
+	private void checkAnswer(boolean userPressedTrue) {
+		boolean answerIsTrue = mQuestionBank[mCurrentIndex].isTrueQuestion();
+		Toast.makeText(
+				this,
+				answerIsTrue == userPressedTrue ? R.string.correct_toast
+						: R.string.incorrect_toast, Toast.LENGTH_SHORT).show();
+	}
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -41,8 +49,7 @@ public class GeoActivity extends Activity {
 
 			@Override
 			public void onClick(View v) {
-				Toast.makeText(GeoActivity.this, R.string.correct_toast,
-						Toast.LENGTH_SHORT).show();
+				checkAnswer(true);
 			}
 		});
 
@@ -51,8 +58,7 @@ public class GeoActivity extends Activity {
 
 			@Override
 			public void onClick(View v) {
-				Toast.makeText(GeoActivity.this, R.string.incorrect_toast,
-						Toast.LENGTH_SHORT).show();
+				checkAnswer(false);
 			}
 		});
 
