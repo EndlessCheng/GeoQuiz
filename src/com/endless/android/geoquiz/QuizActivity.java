@@ -107,7 +107,7 @@ public class QuizActivity extends Activity {
 	public void onSaveInstanceState(Bundle savedInstanceState) {
 		super.onSaveInstanceState(savedInstanceState);
 		Log.i(TAG, "savedInstanceState");
-		savedInstanceState.putInt(KEY_INDEX, 0);
+		savedInstanceState.putInt(KEY_INDEX, mCurrentIndex);
 	}
 
 	@Override
