@@ -1,6 +1,10 @@
 package com.endless.android.geoquiz;
 
+import android.annotation.TargetApi;
+import android.app.ActionBar;
 import android.app.Activity;
+import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -19,6 +23,7 @@ public class QuizActivity extends Activity {
 	private Button mPrevButton;
 	private Button mNextButton;
 	private TextView mQuestionTextView;
+	private TextView mAPILevelTextView;
 
 	private TrueFalse[] mQuestionBank = new TrueFalse[] {
 			new TrueFalse(R.string.question_me, true),
@@ -42,6 +47,7 @@ public class QuizActivity extends Activity {
 						: R.string.incorrect_toast, Toast.LENGTH_SHORT).show();
 	}
 
+	@TargetApi(11)
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -57,6 +63,13 @@ public class QuizActivity extends Activity {
 				updateQuestion();
 			}
 		});
+
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+			ActionBar actionBar = getActionBar();
+			actionBar.setSubtitle("∏„—ßœ∞£°");
+			mAPILevelTextView = (TextView) findViewById(R.id.api_level_text_view);
+			mAPILevelTextView.setText("API Level " + Build.VERSION.SDK_INT);
+		}
 
 		mTrueButton = (Button) findViewById(R.id.true_button);
 		mTrueButton.setOnClickListener(new View.OnClickListener() {
@@ -125,6 +138,8 @@ public class QuizActivity extends Activity {
 	@Override
 	public void onResume() {
 		super.onResume();
+		// Intent i = new Intent(QuizActivity.this, CheatActivity.class);
+		// startActivity(i);
 		Log.d(TAG, "onResume() called");
 	}
 
